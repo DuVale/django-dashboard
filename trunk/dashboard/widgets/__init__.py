@@ -25,5 +25,5 @@ def find_widgets():
 #--------------------------------------------------------------------------------------------
 
 def open_widget(widget):
-    w = __import__("mysite.dashboard.widgets." + widget, globals(), locals(), ["Widgets"])
+    w = __import__("django-dashboard.dashboard.widgets." + widget, globals(), locals(), ["Widgets"])
     return w.Widgets()
