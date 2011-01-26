@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('mysite.dashboard',
+urlpatterns = patterns('djangodashboard.dashboard',
     # Example:
     (r'^view/', 'views.view_widgets'),
     (r'^widget/(?P<name>[a-z_0-9]+)/', 'views.widget'),
