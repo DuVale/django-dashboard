@@ -1,6 +1,6 @@
 import os
 import settings
-# Django settings for mysite project.
+# Django settings for django-dashboard project.
 
 
 DEBUG = True
@@ -76,10 +76,10 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'mysite.middleware.SiteLogin'
+    'djangodashboard.middleware.SiteLogin'
 )
 
-ROOT_URLCONF = 'mysite.urls'
+ROOT_URLCONF = 'djangodashboard.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, "templates"),
@@ -92,7 +92,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django-dashboard.dashboard',
+    'djangodashboard.dashboard',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',

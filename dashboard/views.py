@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from mysite.dashboard.widgets import find_widgets, open_widget
+from djangodashboard.dashboard.widgets import find_widgets, open_widget
 from django.http import HttpResponse
 import models
 import xml.dom.minidom as minidom
