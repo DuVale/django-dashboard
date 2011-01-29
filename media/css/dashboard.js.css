@@ -1,6 +1,6 @@
 /* JS-Enabled CSS */
 
-.widget-head a.remove  {
+.gadget-head a.remove  {
     float: right;
     display: inline;
     background: url(/media/img/buttons.gif) no-repeat -24px 0;
@@ -11,7 +11,7 @@
     outline: none;
 }
 
-.widget-head a.edit  {
+.gadget-head a.edit  {
     float: right;
     display: inline;
     background: url(/media/img/buttons.gif) no-repeat;
@@ -22,7 +22,7 @@
     outline: none;
 }
 
-.widget-head a.collapse  {
+.gadget-head a.collapse  {
     float: left;
     display: inline;
     background: url(/media/img/buttons.gif) no-repeat -52px 0;
@@ -33,17 +33,17 @@
     outline: none;
 }
 
-.collapsed .widget-head a.collapse {background-position:-38px 0;}
-.collapsed .widget-content {display:none !important;}
+.collapsed .gadget-head a.collapse {background-position:-38px 0;}
+.collapsed .gadget-content {display:none !important;}
 
-.widget-placeholder { border: 2px dashed #999;}
-#column1 .widget-placeholder { margin: 30px 35px 0 25px; }
-#column2 .widget-placeholder { margin: 30px 20px 0 20px; }
-#column3 .widget-placeholder { margin: 30px 25px 0 35px; }
+.gadget-placeholder { border: 2px dashed #999;}
+#column1 .gadget-placeholder { margin: 30px 35px 0 25px; }
+#column2 .gadget-placeholder { margin: 30px 20px 0 20px; }
+#column3 .gadget-placeholder { margin: 30px 25px 0 35px; }
 
 .edit-box {
     overflow: hidden;
-    background: #333 url(/media/img/widget-content-bg.png) repeat-x;
+    background: #333 url(/media/img/gadget-content-bg.png) repeat-x;
     margin-bottom: 2px;
     padding: 10px 0;
 }

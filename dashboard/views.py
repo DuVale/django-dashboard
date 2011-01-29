@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from djangodashboard.dashboard.widgets import find_widgets, open_widget
+from djangodashboard.dashboard.gadgets import find_gadgets, open_gadget
 from django.http import HttpResponse
 import models
 import xml.dom.minidom as minidom
@@ -22,18 +22,18 @@ def read_xml(xml):
     dashboard_data = {}
     for column_node in column_nodes:
         column_data = []
-        widget_nodes = children(column_node, 'widget')
-        for widget_node in widget_nodes:
-            widget_data = {}
-            widget_data['id'] = widget_node.getAttribute('id')
-            widget_data['colour'] = widget_node.getAttribute('colour')
-            widget_data['title'] = widget_node.getAttribute('title')
-            widget_data['collapsed'] = widget_node.getAttribute('collapsed')
+        gadget_nodes = children(column_node, 'gadget')
+        for gadget_node in gadget_nodes:
+            gadget_data = {}
+            gadget_data['id'] = gadget_node.getAttribute('id')
+            gadget_data['colour'] = gadget_node.getAttribute('colour')
+            gadget_data['title'] = gadget_node.getAttribute('title')
+            gadget_data['collapsed'] = gadget_node.getAttribute('collapsed')
             try:
-                widget_data['class'] = open_widget(widget_data['id']).widget_info()['class']
+                gadget_data['class'] = open_gadget(gadget_data['id']).gadget_info()['class']
             except:
                 continue
-            column_data.append(widget_data)
+            column_data.append(gadget_data)
         dashboard_data[column_node.getAttribute('id')] = column_data
     return dashboard_data
 
@@ -42,11 +42,11 @@ def read_xml(xml):
 def dashboard(request, name):
     try:
         dashboard = models.Dashboard.objects.get(name=name,user=request.user)
-        widgets = read_xml(dashboard.xml)
+        gadgets = read_xml(dashboard.xml)
     except models.Dashboard.DoesNotExist:
-        widgets = {'1':[],'2':[],'3':[]}
+        gadgets = {'1':[],'2':[],'3':[]}
     return render_to_response('dashboard/dashboard.html', 
-        { 'name':name, 'widgets':widgets })
+        { 'name':name, 'gadgets':gadgets })
 
 #------------------------------------------------------------------------------
 
@@ -63,14 +63,13 @@ def update_ajax(request,name):
 
 #------------------------------------------------------------------------------
 
-def widget(request,name):
-    w = open_widget(name)
+def gadget(request,name):
+    w = open_gadget(name)
     return (w.view(request))
-    assert False, "Error"
 
 #------------------------------------------------------------------------------
 
-def view_widgets(request):
-    return render_to_response('dashboard/view_widgets.html', {'widgets':find_widgets()})
+def view_gadgets(request):
+    return render_to_response('dashboard/view_gadgets.html', {'gadgets':find_gadgets()})
 
 #------------------------------------------------------------------------------
