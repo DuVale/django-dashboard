@@ -5,50 +5,50 @@ var iDashboard = {
     
     settings : {
         columns : '.column',
-        widgetSelector: '.widget',
-        handleSelector: '.widget-head',
-        contentSelector: '.widget-content',
+        gadgetSelector: '.gadget',
+        handleSelector: '.gadget-head',
+        contentSelector: '.gadget-content',
         dashboardName: 'NA',
         
         
-        widgetDefault : {
+        gadgetDefault : {
             movable: true,
             removable: true,
             collapsible: true,
             editable: true,
             colorClasses : ['color-yellow', 'color-red', 'color-blue', 'color-white', 'color-orange', 'color-green']
         },
-        widgetIndividual : {}
+        gadgetIndividual : {}
     },
 
     init : function (name) {
         this.attachStylesheet('/media/css/dashboard.js.css');
-        this.sortWidgets();
-        this.addWidgetControls();
+        this.sortGadgets();
+        this.addGadgetControls();
         this.makeSortable();
         this.settings.dashboardName=name;
     },
     
-    getWidgetSettings : function (id) {
+    getGadgetSettings : function (id) {
         var $ = this.jQuery,
             settings = this.settings;
-        return (id&&settings.widgetIndividual[id]) ? $.extend({},settings.widgetDefault,settings.widgetIndividual[id]) : settings.widgetDefault;
+        return (id&&settings.gadgetIndividual[id]) ? $.extend({},settings.gadgetDefault,settings.gadgetIndividual[id]) : settings.gadgetDefault;
     },
     
-    addWidgetControls : function () {
+    addGadgetControls : function () {
         var iDashboard = this,
             $ = this.jQuery,
             settings = this.settings;
             
-        $(settings.widgetSelector, $(settings.columns)).each(function () {
-            var thisWidgetSettings = iDashboard.getWidgetSettings(this.id);
-            if (thisWidgetSettings.removable) {
+        $(settings.gadgetSelector, $(settings.columns)).each(function () {
+            var thisGadgetSettings = iDashboard.getGadgetSettings(this.id);
+            if (thisGadgetSettings.removable) {
                 $('<a href="#" class="remove">CLOSE</a>').mousedown(function (e) {
                     /* STOP event bubbling */
                     e.stopPropagation();    
                 }).click(function () {
-                    if(confirm('This widget will be removed, ok?')) {
-                        $(this).parents(settings.widgetSelector).animate({
+                    if(confirm('This gadget will be removed, ok?')) {
+                        $(this).parents(settings.gadgetSelector).animate({
                             opacity: 0    
                         },function () {
                             $(this).wrap('<div/>').parent().slideUp(function () {
@@ -61,18 +61,18 @@ var iDashboard = {
                 }).appendTo($(settings.handleSelector, this));
             }
             
-            if (thisWidgetSettings.editable) {
+            if (thisGadgetSettings.editable) {
                 $('<a href="#" class="edit">EDIT</a>').mousedown(function (e) {
                     /* STOP event bubbling */
                     e.stopPropagation();    
                 }).toggle(function () {
                     $(this).css({backgroundPosition: '-66px 0', width: '55px'})
-                        .parents(settings.widgetSelector)
+                        .parents(settings.gadgetSelector)
                             .find('.edit-box').show().find('input').focus();
                     return false;
                 },function () {
                     $(this).css({backgroundPosition: '', width: '24px'})
-                        .parents(settings.widgetSelector)
+                        .parents(settings.gadgetSelector)
                             .find('.edit-box').hide();
                     return false;
                 }).appendTo($(settings.handleSelector,this));
@@ -80,7 +80,7 @@ var iDashboard = {
                     .append('<ul><li class="item"><label>Change the title?</label><input value="' + $('h3',this).text() + '"/></li>')
                     .append((function(){
                         var colorList = '<li class="item"><label>Available colors:</label><ul class="colors">';
-                        $(thisWidgetSettings.colorClasses).each(function () {
+                        $(thisGadgetSettings.colorClasses).each(function () {
                             colorList += '<li class="' + this + '"/>';
                         });
                         return colorList + '</ul>';
@@ -89,12 +89,12 @@ var iDashboard = {
                     .insertAfter($(settings.handleSelector,this));
             }
             
-            if (thisWidgetSettings.collapsible) {
+            if (thisGadgetSettings.collapsible) {
                 $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function (e) {
                     /* STOP event bubbling */
                     e.stopPropagation();    
                 }).click(function(){
-                    $(this).parents(settings.widgetSelector).toggleClass('collapsed');
+                    $(this).parents(settings.gadgetSelector).toggleClass('collapsed');
                     iDashboard.savePreferences();
                     return false;    
                 }).prependTo($(settings.handleSelector,this));
@@ -103,16 +103,16 @@ var iDashboard = {
         
         $('.edit-box').each(function () {
             $('input',this).keyup(function () {
-                $(this).parents(settings.widgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
+                $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
                 iDashboard.savePreferences();
             });
             $('ul.colors li',this).click(function () {
                 
                 var colorStylePattern = /\bcolor-[\w]{1,}\b/,
-                    thisWidgetColorClass = $(this).parents(settings.widgetSelector).attr('class').match(colorStylePattern)
-                if (thisWidgetColorClass) {
-                    $(this).parents(settings.widgetSelector)
-                        .removeClass(thisWidgetColorClass[0])
+                    thisGadgetColorClass = $(this).parents(settings.gadgetSelector).attr('class').match(colorStylePattern)
+                if (thisGadgetColorClass) {
+                    $(this).parents(settings.gadgetSelector)
+                        .removeClass(thisGadgetColorClass[0])
                         .addClass($(this).attr('class').match(colorStylePattern)[0]);
                     iDashboard.savePreferences();
                 }
@@ -134,10 +134,10 @@ var iDashboard = {
             settings = this.settings,
             $sortableItems = (function () {
                 var notSortable = '';
-                $(settings.widgetSelector,$(settings.columns)).each(function (i) {
-                    if (!iDashboard.getWidgetSettings(this.id).movable) {
+                $(settings.gadgetSelector,$(settings.columns)).each(function (i) {
+                    if (!iDashboard.getGadgetSettings(this.id).movable) {
                         if(!this.id) {
-                            this.id = 'widget-no-id-' + i;
+                            this.id = 'gadget-no-id-' + i;
                         }
                         notSortable += '#' + this.id + ',';
                     }
@@ -164,7 +164,7 @@ var iDashboard = {
             items: $sortableItems,
             connectWith: $(settings.columns),
             handle: settings.handleSelector,
-            placeholder: 'widget-placeholder',
+            placeholder: 'gadget-placeholder',
             forcePlaceholderSize: true,
             revert: 300,
             delay: 100,
@@ -189,9 +189,9 @@ var iDashboard = {
         $(settings.columns).each(function(i){
             column_number = i+1;
             xml_string+="<column id=\""+column_number+"\">\r\n";
-            $(settings.widgetSelector,this).each(function(i){
+            $(settings.gadgetSelector,this).each(function(i){
                 collapse=$(settings.contentSelector,this).css('display') == 'none' ? "true" : "false";
-                xml_string+="<widget id=\""+$(this).attr('id')+"\" \
+                xml_string+="<gadget id=\""+$(this).attr('id')+"\" \
 colour=\""+$(this).attr('class').match(/\bcolor-[\w]{1,}\b/)+"\" \
 title=\""+$('h3:eq(0)',this).text().replace(/\|/g,'[-PIPE-]').replace(/,/g,'[-COMMA-]')+"\" \
 collapsed=\""+collapse+"\"/> \r\n";
@@ -204,10 +204,14 @@ collapsed=\""+collapse+"\"/> \r\n";
         
     },
     
-    sortWidgets : function () {
+    sortGadgets : function () {
         var iDashboard = this,
             $ = this.jQuery,
             settings = this.settings;
+        
+        $(settings.columns).each(function(i){
+        //alert('load here');
+        });
                 
         $('body').css({background:'#000'});
         $(settings.columns).css({visibility:'visible'});

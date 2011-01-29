@@ -3,27 +3,27 @@ import os
 
 #--------------------------------------------------------------------------------------------
 
-def find_widgets():
-    widget_dir = os.path.dirname(os.path.abspath(__file__))
+def find_gadgets():
+    gadget_dir = os.path.dirname(os.path.abspath(__file__))
     try:
         if True:
-            fileDict = [f[:-3] for f in os.listdir(widget_dir)
+            fileDict = [f[:-3] for f in os.listdir(gadget_dir)
                     if not f.startswith('_') and f.endswith('.py')]
         else:
-            fileDict = [f[:-4] for f in os.listdir(widget_dir)
+            fileDict = [f[:-4] for f in os.listdir(gadget_dir)
                     if not f.startswith('_') and f.endswith('.pyc')]
     except OSError:
         return []
     
-    widgetArray=[]
+    gadgetArray=[]
     for file in fileDict:
-        widgetArray.append(open_widget(file).widget_info())
+        gadgetArray.append(open_gadget(file).gadget_info())
 
-    return widgetArray
+    return gadgetArray
         
 
 #--------------------------------------------------------------------------------------------
 
-def open_widget(widget):
-    w = __import__("djangodashboard.dashboard.widgets." + widget, globals(), locals(), ["Widgets"])
-    return w.Widgets()
+def open_gadget(gadget):
+    g = __import__("djangodashboard.dashboard.gadgets." + gadget, globals(), locals(), ["Gadget"])
+    return g.Gadget()
