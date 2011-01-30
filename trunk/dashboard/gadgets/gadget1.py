@@ -7,9 +7,10 @@ class Gadget:
 
     def gadget_info(self):
         return {'name':'gadget1',
-                'heading':'This is a test',
+                'title':'This is a gadget1',
                 'description':'This is gadget1',
-                'class':'gadget color-green'}
+                'colour':'color-green'}
+                
 
     def view(self,request):
         return render_to_response('dashboard/gadgets/gadget1.html',{})
