@@ -15,17 +15,18 @@
             obj.height=obj.contentWindow.document.body.scrollHeight;
         }
     </script>
+<div style="text-align:right;color:white"><a href="/dashboard/{{ name }}/view-gadgets/">Add gadgets</a></div>
 
     <div id="columns">
-        
-        <ul id="column1" class="column">
-        {% for gadget in gadgets.1 %}
-            <li class="{{ gadget.class }}" id="{{ gadget.id }}">
+        {% for column in dashboard_data %}
+        <ul id="column{{ column.column }}" class="column">
+        {% for gadget in column.gadgets %}
+            <li class="gadget {{ gadget.get_colour }}{{ gadget.get_collapsed_style }}" id="{{ gadget.uuid }}">
                 <div class="gadget-head">
                     <h3>{{ gadget.title }}</h3>
                 </div>
                 <div class="gadget-content">
-                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="/dashboard/gadget/{{ gadget.id }}/" scrolling="NO" height="1" frameborder="0">
+                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="/dashboard/gadget/{{ gadget.gadget }}/" scrolling="NO" height="1" frameborder="0">
                 An iframe capable browser is 
                 required to view this web site.
                 </iframe>
@@ -33,39 +34,7 @@
             </li>
         {% endfor %}
         </ul>
-
-        <ul id="column2" class="column">
-        {% for gadget in gadgets.2 %}
-            <li class="{{ gadget.class }}" id="{{ gadget.id }}">
-                <div class="gadget-head">
-                    <h3>{{ gadget.title }}</h3>
-                </div>
-                <div class="gadget-content">
-                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="/dashboard/gadget/{{ gadget.id }}/" scrolling="NO" height="1" frameborder="0">
-                An iframe capable browser is 
-                required to view this web site.
-                </iframe>
-                </div>
-            </li>
-        {% endfor %}
-        </ul>
-        
-        <ul id="column3" class="column">
-        {% for gadget in gadgets.3 %}
-            <li class="{{ gadget.class }}" id="{{ gadget.id }}">
-                <div class="gadget-head">
-                    <h3>{{ gadget.title }}</h3>
-                </div>
-                <div class="gadget-content">
-                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="/dashboard/gadget/{{ gadget.id }}/" scrolling="NO" height="1" frameborder="0">
-                An iframe capable browser is 
-                required to view this web site.
-                </iframe>
-                </div>
-                
-            </li>
-        {% endfor %}    
-        </ul>
+    {% endfor %}
     </div>
 
     <script type="text/javascript" src="/media/js/jquery-ui-personalized-1.6rc2.min.js"></script>
