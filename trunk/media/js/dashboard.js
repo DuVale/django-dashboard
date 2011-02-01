@@ -9,6 +9,7 @@ var iDashboard = {
         handleSelector: '.gadget-head',
         contentSelector: '.gadget-content',
         dashboardName: 'NA',
+        fields: [],
         
         
         gadgetDefault : {
@@ -81,7 +82,7 @@ var iDashboard = {
                     return false;
                 }).appendTo($(settings.handleSelector,this));
                 $('<div class="edit-box" style="display:none;"/>')
-                    .append('<ul><li class="item"><label>Change the title?</label><input name="title" value="' + $('h3',this).text() + '"/></li>')
+                    .append('<ul><li class="item"><label>Change the title?</label><input name="gadgettitle" value="' + $('h3',this).text() + '"/></li>')
                     .append((function(){
                         var colorList = '<li class="item"><label>Available colours:</label><ul class="colors">';
                         $(thisGadgetSettings.colorClasses).each(function () {
@@ -90,7 +91,24 @@ var iDashboard = {
                         return colorList + '</ul>';
                     })())
                     .append((function(){
-                        return '<ul><li class="item"><label>Change the title?</label><input name="option" value=""/></li>';
+                        fieldList = '';
+                        $(thisGadgetSettings.fields).each(function () {
+                            if (this.type == 'text') {
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input name="'+this.id+'" value="'+this.value+'"/></li>';
+                            } else if(this.type == 'choice') {
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><select name="'+this.id+'">';
+                                selected = this.value;
+                                $(this.choices).each(function () {
+                                    if (this == selected) {
+                                        fieldList += '<option selected>'+this+'</option>';
+                                    } else {
+                                        fieldList += '<option>'+this+'</option>';
+                                    }
+                                });
+                                fieldList += '</select></li>';
+                            }
+                        });
+                        return fieldList;
                     })())
                     .append('</ul>')
                     .insertAfter($(settings.handleSelector,this));
@@ -111,7 +129,7 @@ var iDashboard = {
         
         $('.edit-box').each(function () {
             $('input',this).keyup(function () {
-                if (this.name == 'title') {
+                if (this.name == 'gadgettitle') {
                     $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
                 }
 
