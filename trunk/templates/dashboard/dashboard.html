@@ -21,7 +21,7 @@
         {% for column in dashboard_data %}
         <ul id="column{{ column.column }}" class="column">
         {% for gadget in column.gadgets %}
-            <li class="gadget {{ gadget.get_colour }}{{ gadget.get_collapsed_style }}" id="{{ gadget.uuid }}">
+            <li class="gadget {{ gadget.get_colour }}{{ gadget.get_collapsed_style }}" id="{{ gadget.make_html_id }}" dbid="{{ gadget.uuid }}">
                 <div class="gadget-head">
                     <h3>{{ gadget.title }}</h3>
                 </div>
@@ -38,8 +38,31 @@
     </div>
 
     <script type="text/javascript" src="/media/js/jquery-ui-personalized-1.6rc2.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    function mainGadgetIndividual(id) {
+        var iGadgetInIndividual = {{% for column in dashboard_data %}{% for gadget in column.gadgets %}
+            {{ gadget.make_html_id }} : {
+                // movable: false,
+                // removable: false,
+                // collapsible: false,
+                // editable: false,
+                // colorClasses : ['color-yellow', 'color-red']
+            },{% endfor %}{% endfor %}
+        }
+        return iGadgetInIndividual[id];
+        
+    }
+    
+
+
+    </script>
+    
     <script type="text/javascript" src="/media/js/dashboard.js"></script>
     <script type="text/javascript">
+    
+    
     iDashboard.init('{{ name }}');
     </script>
 </body>

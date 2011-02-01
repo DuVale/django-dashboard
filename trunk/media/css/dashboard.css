@@ -12,9 +12,11 @@ a {color:white;}
 .color-white  {background:#dfdfdf;}
 .color-orange {background:#f66e00;}
 .color-green  {background:#8dc100;}
+.color-purple {background:#903f98;}
 .color-yellow h3,
 .color-white h3,
 .color-green h3
+.color-purple h3
 	{color:#000;}
 .color-red h3,
 .color-blue h3,

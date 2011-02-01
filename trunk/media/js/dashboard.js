@@ -16,9 +16,12 @@ var iDashboard = {
             removable: true,
             collapsible: true,
             editable: true,
-            colorClasses : ['color-yellow', 'color-red', 'color-blue', 'color-white', 'color-orange', 'color-green']
+            colorClasses : ['color-yellow', 'color-red', 'color-blue', 'color-white', 'color-orange', 'color-green', 'color-purple']
         },
-        gadgetIndividual : {}
+        gadgetIndividual : function (id) {
+            return mainGadgetIndividual(id);
+           
+        }
     },
 
     init : function (name) {
@@ -32,7 +35,8 @@ var iDashboard = {
     getGadgetSettings : function (id) {
         var $ = this.jQuery,
             settings = this.settings;
-        return (id&&settings.gadgetIndividual[id]) ? $.extend({},settings.gadgetDefault,settings.gadgetIndividual[id]) : settings.gadgetDefault;
+            var gi = settings.gadgetIndividual(id);
+        return (id && gi) ? $.extend({},settings.gadgetDefault,gi) : settings.gadgetDefault;
     },
     
     addGadgetControls : function () {
@@ -77,16 +81,20 @@ var iDashboard = {
                     return false;
                 }).appendTo($(settings.handleSelector,this));
                 $('<div class="edit-box" style="display:none;"/>')
-                    .append('<ul><li class="item"><label>Change the title?</label><input value="' + $('h3',this).text() + '"/></li>')
+                    .append('<ul><li class="item"><label>Change the title?</label><input name="title" value="' + $('h3',this).text() + '"/></li>')
                     .append((function(){
-                        var colorList = '<li class="item"><label>Available colors:</label><ul class="colors">';
+                        var colorList = '<li class="item"><label>Available colours:</label><ul class="colors">';
                         $(thisGadgetSettings.colorClasses).each(function () {
                             colorList += '<li class="' + this + '"/>';
                         });
                         return colorList + '</ul>';
                     })())
+                    .append((function(){
+                        return '<ul><li class="item"><label>Change the title?</label><input name="option" value=""/></li>';
+                    })())
                     .append('</ul>')
                     .insertAfter($(settings.handleSelector,this));
+                    
             }
             
             if (thisGadgetSettings.collapsible) {
@@ -103,7 +111,10 @@ var iDashboard = {
         
         $('.edit-box').each(function () {
             $('input',this).keyup(function () {
-                $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
+                if (this.name == 'title') {
+                    $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
+                }
+
                 iDashboard.savePreferences();
             });
             $('ul.colors li',this).click(function () {
@@ -191,7 +202,7 @@ var iDashboard = {
             xml_string+="<column id=\""+column_number+"\">\r\n";
             $(settings.gadgetSelector,this).each(function(i){
                 collapse=$(settings.contentSelector,this).css('display') == 'none' ? "true" : "false";
-                xml_string+="<gadget id=\""+$(this).attr('id')+"\" \
+                xml_string+="<gadget id=\""+$(this).attr('dbid')+"\" \
 colour=\""+$(this).attr('class').match(/\bcolor-[\w]{1,}\b/)+"\" \
 title=\""+$('h3:eq(0)',this).text().replace(/\|/g,'[-PIPE-]').replace(/,/g,'[-COMMA-]')+"\" \
 collapsed=\""+collapse+"\"/> \r\n";
