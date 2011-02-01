@@ -1,4 +1,6 @@
 from django.db import models
+import simplejson as json # you can get this from http://pypi.python.org/pypi/simplejson/
+from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 from djangodashboard.dashboard.gadgets import open_gadget
 
@@ -98,6 +100,19 @@ class GadgetInfomation(models.Model):
             return open_gadget(self.gadget).gadget_info()['colour']
         except:
             return ""
+    
+    def get_extra_fields(self):
+        try:
+            fields = open_gadget(self.gadget).gadget_info()['fields']
+        except:
+            return ""
+        
+        newFields=[]
+        for field in fields:
+            #field['value']="USA";
+            newFields.append(field)
+        
+        return mark_safe(json.JSONEncoder().encode(newFields))
     
     def get_collapsed_style(self):
         if self.collapsed:

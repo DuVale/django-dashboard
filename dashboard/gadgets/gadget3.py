@@ -6,10 +6,13 @@ class Gadget:
         pass
     
     def gadget_info(self):
+        fields = []
         return {'name':'gadget3',
                 'title':'This is a gadget3',
                 'description':'This is gadget3',
-                'colour':'color-blue'}
+                'colour':'color-blue',
+                'fields':fields}
+
 
     def view(self,request):
         return render_to_response('dashboard/gadgets/gadget3.html',{})
