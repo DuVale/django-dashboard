@@ -98,9 +98,13 @@ class GadgetInfomation(models.Model):
             return open_gadget(self.gadget).gadget_info()['colour']
         except:
             return ""
-        
+    
     def get_collapsed_style(self):
         if self.collapsed:
             return ' collapsed'
         else:
             return ''
+    
+    def make_html_id(self):
+        id = "id" + self.uuid.replace('-','')
+        return id
