@@ -3,15 +3,7 @@ from djangodashboard.dashboard.gadgets import find_gadgets, open_gadget
 from django.http import HttpResponse, HttpResponseRedirect
 import models
 import xml.dom.minidom as minidom
-
-#------------------------------------------------------------------------------
-
-def children(dom, name):
-    children = []
-    for node in dom.childNodes:
-        if node.localName == name:
-            children.append(node)
-    return children
+from xml_utils import children
 
 #------------------------------------------------------------------------------
 

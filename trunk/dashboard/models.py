@@ -6,6 +6,7 @@ from djangodashboard.dashboard.gadgets import open_gadget
 
 from django.db.models import CharField
 import uuid
+from xml_utils import readValueFromXMLField
 
 #------------------------------------------------------------------------------
 
@@ -106,12 +107,12 @@ class GadgetInfomation(models.Model):
             fields = open_gadget(self.gadget).gadget_info()['fields']
         except:
             return ""
-        
         newFields=[]
         for field in fields:
-            #field['value']="USA";
+            value = readValueFromXMLField(field['id'],self.modifier)
+            if value != '':
+                field['value'] = value
             newFields.append(field)
-        
         return mark_safe(json.JSONEncoder().encode(newFields))
     
     def get_collapsed_style(self):
