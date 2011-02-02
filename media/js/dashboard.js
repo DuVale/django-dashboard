@@ -99,10 +99,10 @@ var iDashboard = {
                                 fieldList += '<ul><li class="item"><label>'+this.title+'</label><select name="'+this.id+'">';
                                 selected = this.value;
                                 $(this.choices).each(function () {
-                                    if (this == selected) {
-                                        fieldList += '<option selected>'+this+'</option>';
+                                    if (this[0] == selected) {
+                                        fieldList += '<option value="'+this[0]+'" selected>'+this[1]+'</option>';
                                     } else {
-                                        fieldList += '<option>'+this+'</option>';
+                                        fieldList += '<option value="'+this[0]+'">'+this[1]+'</option>';
                                     }
                                 });
                                 fieldList += '</select></li>';

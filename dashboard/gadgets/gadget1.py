@@ -17,4 +17,3 @@ class Gadget:
     def view(self,request):
         return render_to_response('dashboard/gadgets/gadget1.html',{})
 
-
