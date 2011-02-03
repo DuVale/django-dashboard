@@ -47,6 +47,7 @@ var iDashboard = {
             
         $(settings.gadgetSelector, $(settings.columns)).each(function () {
             var thisGadgetSettings = iDashboard.getGadgetSettings(this.id);
+            var mainId = this.id;
             if (thisGadgetSettings.removable) {
                 $('<a href="#" class="remove">CLOSE</a>').mousedown(function (e) {
                     /* STOP event bubbling */
@@ -94,9 +95,9 @@ var iDashboard = {
                         fieldList = '';
                         $(thisGadgetSettings.fields).each(function () {
                             if (this.type == 'text') {
-                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input name="'+this.id+'" value="'+this.value+'"/></li>';
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input id="'+mainId+this.id+'" name="'+this.id+'" value="'+this.value+'"/></li>';
                             } else if(this.type == 'choice') {
-                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><select name="'+this.id+'">';
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><select id="'+mainId+this.id+'">';
                                 selected = this.value;
                                 $(this.choices).each(function () {
                                     if (this[0] == selected) {
@@ -220,10 +221,23 @@ var iDashboard = {
             xml_string+="<column id=\""+column_number+"\">\r\n";
             $(settings.gadgetSelector,this).each(function(i){
                 collapse=$(settings.contentSelector,this).css('display') == 'none' ? "true" : "false";
-                xml_string+="<gadget id=\""+$(this).attr('dbid')+"\" \
-colour=\""+$(this).attr('class').match(/\bcolor-[\w]{1,}\b/)+"\" \
-title=\""+$('h3:eq(0)',this).text().replace(/\|/g,'[-PIPE-]').replace(/,/g,'[-COMMA-]')+"\" \
-collapsed=\""+collapse+"\"/> \r\n";
+                mainId = $(this).attr('id');
+                xml_string+="<gadget id=\""+$(this).attr('dbid')+"\" ";
+                xml_string+="colour=\""+$(this).attr('class').match(/\bcolor-[\w]{1,}\b/)+"\" ";
+                xml_string+="title=\""+$('h3:eq(0)',this).text().replace(/\|/g,'[-PIPE-]').replace(/,/g,'[-COMMA-]')+"\" ";
+                xml_string+="collapsed=\""+collapse+"\">";
+                var thisGadgetSettings = iDashboard.getGadgetSettings($(this).attr('id'));
+                $(thisGadgetSettings.fields).each(function () {
+                    xml_string+="<"+this.id+">";
+                    var docForm=document.getElementById(mainId+this.id);
+                    if (this.type == 'text') {
+                        xml_string+=docForm.value;
+                    } else if(this.type == 'choice') {
+                        xml_string+=docForm.options[docForm.selectedIndex].value;
+                    }
+                    xml_string+="</"+this.id+">";
+                });
+                xml_string+="</gadget> \r\n";
             });
             xml_string+="</column>\r\n";
         });
