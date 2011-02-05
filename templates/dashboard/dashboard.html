@@ -10,10 +10,7 @@
     <script type="text/javascript">
         $('<style type="text/css">.column{visibility:hidden;}</style>').appendTo('head');
         $('body').css({background: '#000 url(media/img/load.gif) no-repeat center'})
-        function changeHeight(obj)
-        {
-            obj.height=obj.contentWindow.document.body.scrollHeight;
-        }
+
     </script>
 <div style="text-align:right;color:white"><a href="{% url view_gadgets name %}">Add gadgets</a></div>
 
@@ -26,7 +23,7 @@
                     <h3>{{ gadget.title }}</h3>
                 </div>
                 <div class="gadget-content">
-                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="{% url view_gadget uuid=gadget.uuid %}" scrolling="NO" height="1" frameborder="0">
+                <iframe id="iframe{{ gadget.make_html_id }}" width="100%" id="the_iframe" onLoad="changeHeight(this);" src="{% url view_gadget uuid=gadget.uuid %}" scrolling="NO" height="1" frameborder="0">
                 An iframe capable browser is 
                 required to view this web site.
                 </iframe>
