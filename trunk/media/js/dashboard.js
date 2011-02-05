@@ -1,4 +1,11 @@
 
+function changeHeight(obj) {
+    obj.height=obj.contentWindow.document.body.scrollHeight;
+}
+
+
+
+
 var iDashboard = {
     
     jQuery : $,
@@ -95,9 +102,9 @@ var iDashboard = {
                         fieldList = '';
                         $(thisGadgetSettings.fields).each(function () {
                             if (this.type == 'text') {
-                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input id="'+mainId+this.id+'" name="'+this.id+'" value="'+this.value+'"/></li>';
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input id="'+mainId+this.id+'" gadgetid="'+mainId+'" name="'+this.id+'" value="'+this.value+'"/></li>';
                             } else if(this.type == 'choice') {
-                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><select id="'+mainId+this.id+'">';
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><select id="'+mainId+this.id+'" gadgetid="'+mainId+'">';
                                 selected = this.value;
                                 $(this.choices).each(function () {
                                     if (this[0] == selected) {
@@ -127,17 +134,23 @@ var iDashboard = {
                 }).prependTo($(settings.handleSelector,this));
             }
         });
-        
         $('.edit-box').each(function () {
             $('select',this).change(function () {
                 iDashboard.savePreferences();
+                var currSrc = $('#iframe'+$(this).attr('gadgetid')).attr("src");
+                $('#iframe'+$(this).attr('gadgetid')).attr("src", currSrc)
+                changeHeight(document.getElementById('iframe'+$(this).attr('gadgetid')))
             });
             $('input',this).change(function () {
                 if (this.name == 'gadgettitle') {
                     $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
+                    iDashboard.savePreferences();
+                } else {
+                    iDashboard.savePreferences();
+                    var currSrc = $('#iframe'+$(this).attr('gadgetid')).attr("src");
+                    $('#iframe'+$(this).attr('gadgetid')).attr("src", currSrc)
+                    changeHeight(document.getElementById('iframe'+$(this).attr('gadgetid')))
                 }
-
-                iDashboard.savePreferences();
             });
             $('ul.colors li',this).click(function () {
                 
