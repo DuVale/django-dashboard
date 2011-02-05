@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 
 class Gadget:
 
@@ -16,5 +16,6 @@ class Gadget:
                 'fields':fields}
 
 
-    def view(self,request):
-        return render_to_response('dashboard/gadgets/gadget2.html',{})
+    def view(self,request,gadget_information):
+        options = gadget_information.get_extra_fields()
+        return render_to_response('dashboard/gadgets/gadget2.html',{'options':options})

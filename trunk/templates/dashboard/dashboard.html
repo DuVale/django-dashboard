@@ -15,7 +15,7 @@
             obj.height=obj.contentWindow.document.body.scrollHeight;
         }
     </script>
-<div style="text-align:right;color:white"><a href="/dashboard/{{ name }}/view-gadgets/">Add gadgets</a></div>
+<div style="text-align:right;color:white"><a href="{% url view_gadgets name %}">Add gadgets</a></div>
 
     <div id="columns">
         {% for column in dashboard_data %}
@@ -26,7 +26,7 @@
                     <h3>{{ gadget.title }}</h3>
                 </div>
                 <div class="gadget-content">
-                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="/dashboard/gadget/{{ gadget.gadget }}/" scrolling="NO" height="1" frameborder="0">
+                <iframe width="100%" id="the_iframe" onLoad="changeHeight(this);" src="{% url view_gadget uuid=gadget.uuid %}" scrolling="NO" height="1" frameborder="0">
                 An iframe capable browser is 
                 required to view this web site.
                 </iframe>
@@ -40,7 +40,6 @@
     <script type="text/javascript" src="/media/js/jquery-ui-personalized-1.6rc2.min.js"></script>
     
     <script type="text/javascript">
-    
     function mainGadgetIndividual(id) {
         var iGadgetInIndividual = {{% for column in dashboard_data %}{% for gadget in column.gadgets %}
             {{ gadget.make_html_id }} : {
@@ -48,22 +47,16 @@
                 // removable: false,
                 // collapsible: false,
                 // editable: false,
-                fields:{{ gadget.get_extra_fields }}
+                fields:{{ gadget.get_extra_fields_json }}
                 // colorClasses : ['color-yellow', 'color-red']
             },{% endfor %}{% endfor %}
         }
         return iGadgetInIndividual[id];
         
     }
-    
-
-
     </script>
-    
     <script type="text/javascript" src="/media/js/dashboard.js"></script>
     <script type="text/javascript">
-    
-    
     iDashboard.init('{{ name }}');
     </script>
 </body>

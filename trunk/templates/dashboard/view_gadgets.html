@@ -5,7 +5,7 @@
 <body>
 <ul>
 {% for gadget in gadgets %}
-<li><a href="/dashboard/{{ name }}/add/{{ gadget.name }}/">{{ gadget.name }}</a></li>
+<li><a href="{% url add_gadets name=name  gadget=gadget.name %}/">{{ gadget.name }}</a></li>
 {% endfor %}
 </ul>
 </body>
