@@ -13,9 +13,7 @@ def dashboard(request, name):
     except models.Dashboard.DoesNotExist:
         dashboard = models.Dashboard(name=name,user=request.user)
         dashboard.save()
-    
     dashboard_data = []
-    
     column_data = {}
     column_data['gadgets'] = models.GadgetInfomation.objects.filter(dashboard=dashboard,column_number=1).order_by('position')
     column_data['column'] = 1
@@ -58,6 +56,12 @@ def update_ajax(request,name):
                     gadget_information.collapsed = False
                 else:
                     gadget_information.collapsed = True
+                if len(gadget_node.childNodes) > 0:
+                    mods = '<xml>'
+                    for gn in gadget_node.childNodes:
+                        mods += gn.toxml()
+                    mods += '</xml>'
+                    gadget_information.modifier = mods
                 gadget_information.save()
                 position = position+1
             column_number = column_number+1
@@ -93,3 +97,5 @@ def add_gadget(request,name,gadget):
     gadget_information.save()
     url = "/dashboard/%s/" %(name)
     return HttpResponseRedirect(url)
+
+#------------------------------------------------------------------------------

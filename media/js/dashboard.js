@@ -129,7 +129,10 @@ var iDashboard = {
         });
         
         $('.edit-box').each(function () {
-            $('input',this).keyup(function () {
+            $('select',this).change(function () {
+                iDashboard.savePreferences();
+            });
+            $('input',this).change(function () {
                 if (this.name == 'gadgettitle') {
                     $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
                 }
