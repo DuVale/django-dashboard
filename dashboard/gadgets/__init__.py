@@ -14,13 +14,10 @@ def find_gadgets():
                     if not f.startswith('_') and f.endswith('.pyc')]
     except OSError:
         return []
-    
     gadgetArray=[]
     for file in fileDict:
         gadgetArray.append(open_gadget(file).gadget_info())
-
     return gadgetArray
-        
 
 #--------------------------------------------------------------------------------------------
 

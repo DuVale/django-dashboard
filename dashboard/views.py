@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from djangodashboard.dashboard.gadgets import find_gadgets, open_gadget
 from django.http import HttpResponse, HttpResponseRedirect
 import models
@@ -70,9 +70,10 @@ def update_ajax(request,name):
 
 #------------------------------------------------------------------------------
 
-def gadget(request,name):
-    w = open_gadget(name)
-    return (w.view(request))
+def gadget(request,uuid):
+    gadget_information = get_object_or_404(models.GadgetInfomation,uuid=uuid)
+    w = open_gadget(gadget_information.gadget)
+    return (w.view(request,gadget_information))
 
 #------------------------------------------------------------------------------
 

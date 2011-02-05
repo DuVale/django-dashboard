@@ -107,6 +107,19 @@ class GadgetInfomation(models.Model):
             fields = open_gadget(self.gadget).gadget_info()['fields']
         except:
             return ""
+        newFields={}
+        for field in fields:
+            value = readValueFromXMLField(field['id'],self.modifier)
+            if value != '':
+                field['value'] = value
+            newFields[field['id']] = value
+        return newFields
+
+    def get_extra_fields_json(self):
+        try:
+            fields = open_gadget(self.gadget).gadget_info()['fields']
+        except:
+            return []
         newFields=[]
         for field in fields:
             value = readValueFromXMLField(field['id'],self.modifier)
