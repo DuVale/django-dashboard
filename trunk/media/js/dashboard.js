@@ -102,7 +102,13 @@ var iDashboard = {
                         fieldList = '';
                         $(thisGadgetSettings.fields).each(function () {
                             if (this.type == 'text') {
-                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input id="'+mainId+this.id+'" gadgetid="'+mainId+'" name="'+this.id+'" value="'+this.value+'"/></li>';
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input type="text" id="'+mainId+this.id+'" gadgetid="'+mainId+'" name="'+this.id+'" value="'+this.value+'"/></li>';
+                            } else if (this.type == 'checkbox') {
+                                checked = '';
+                                if (this.value == '1') {
+                                    checked = ' checked';
+                                }
+                                fieldList += '<ul><li class="item"><label>'+this.title+'</label><input type="checkbox" id="'+mainId+this.id+'" gadgetid="'+mainId+'" name="'+this.id+'"'+checked+'/></li>';
                             } else if(this.type == 'choice') {
                                 fieldList += '<ul><li class="item"><label>'+this.title+'</label><select id="'+mainId+this.id+'" gadgetid="'+mainId+'">';
                                 selected = this.value;
@@ -248,9 +254,16 @@ var iDashboard = {
                     var docForm=document.getElementById(mainId+this.id);
                     if (this.type == 'text') {
                         xml_string+=docForm.value;
+                    } else if(this.type == 'checkbox') {
+                        if (docForm.checked) {
+                            xml_string+='1';
+                        } else {
+                            xml_string+='0';
+                        }
                     } else if(this.type == 'choice') {
                         xml_string+=docForm.options[docForm.selectedIndex].value;
                     }
+                    
                     xml_string+="</"+this.id+">";
                 });
                 xml_string+="</gadget> \r\n";
