@@ -90,7 +90,7 @@ var iDashboard = {
                     return false;
                 }).appendTo($(settings.handleSelector,this));
                 $('<div class="edit-box" style="display:none;"/>')
-                    .append('<ul><li class="item"><label>Change the title?</label><input name="gadgettitle" value="' + $('h3',this).text() + '"/></li>')
+                    .append('<ul><li class="item"><label>Change the title?</label><input name="gadgettitle" id="gadgettitle'+this.id+'" value="' + $('h3',this).text() + '"/></li>')
                     .append((function(){
                         var colorList = '<li class="item"><label>Available colours:</label><ul class="colors">';
                         $(thisGadgetSettings.colorClasses).each(function () {
@@ -124,7 +124,7 @@ var iDashboard = {
                         });
                         return fieldList;
                     })())
-                    .append('</ul>')
+                    .append('<ul><li class="item"><label>&nbsp;</label><input type="button" value="Save" onclick="iDashboard.submitPreferences(\''+mainId+'\');"></input></li></ul></form>')
                     .insertAfter($(settings.handleSelector,this));
                     
             }
@@ -141,23 +141,6 @@ var iDashboard = {
             }
         });
         $('.edit-box').each(function () {
-            $('select',this).change(function () {
-                iDashboard.savePreferences();
-                var currSrc = $('#iframe'+$(this).attr('gadgetid')).attr("src");
-                $('#iframe'+$(this).attr('gadgetid')).attr("src", currSrc)
-                changeHeight(document.getElementById('iframe'+$(this).attr('gadgetid')))
-            });
-            $('input',this).change(function () {
-                if (this.name == 'gadgettitle') {
-                    $(this).parents(settings.gadgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
-                    iDashboard.savePreferences();
-                } else {
-                    iDashboard.savePreferences();
-                    var currSrc = $('#iframe'+$(this).attr('gadgetid')).attr("src");
-                    $('#iframe'+$(this).attr('gadgetid')).attr("src", currSrc)
-                    changeHeight(document.getElementById('iframe'+$(this).attr('gadgetid')))
-                }
-            });
             $('ul.colors li',this).click(function () {
                 
                 var colorStylePattern = /\bcolor-[\w]{1,}\b/,
@@ -232,11 +215,27 @@ var iDashboard = {
             }
         });
     },
-    
+    submitPreferences : function (gadgetId) {
+        var iDashboard = this,
+            $ = this.jQuery,
+            settings = this.settings;
+        $(settings.columns).each(function(i){
+            column_number = i+1;
+            $(settings.gadgetSelector,this).each(function(i){
+               var title = $("#gadgettitle"+this.id);
+               $(title).parents(settings.gadgetSelector).find('h3').text( $(title).val().length>20 ? $(title).val().substr(0,20)+'...' : $(title).val() );
+            });
+        });
+        iDashboard.savePreferences();
+        var currSrc = $('#iframe'+gadgetId).attr("src");
+        $('#iframe'+gadgetId).attr("src", currSrc);
+        changeHeight(document.getElementById('iframe'+gadgetId));
+        
+    },
     savePreferences : function () {
         var iDashboard = this,
             $ = this.jQuery,
-            settings = this.settings,
+            settings = this.settings;
         xml_string="<xml>\r\n";
         $(settings.columns).each(function(i){
             column_number = i+1;
