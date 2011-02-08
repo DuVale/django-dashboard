@@ -22,6 +22,14 @@
     outline: none;
 }
 
+.gadget-head img.icon  {
+    position:static;
+    margin-top:-15px;
+    width:32px;
+    margin-right:5px;
+    float:left;
+}
+
 .gadget-head a.collapse  {
     float: right;
     display: inline;

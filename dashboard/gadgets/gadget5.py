@@ -11,6 +11,7 @@ class Gadget:
                 'title':'This is a gadget5',
                 'description':'This is gadget5',
                 'colour':'color-orange',
+                'icon':'/media/img/circle.png',
                 'fields':fields}
 
 

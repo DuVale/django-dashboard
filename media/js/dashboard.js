@@ -24,6 +24,7 @@ var iDashboard = {
             removable: true,
             collapsible: true,
             editable: true,
+            icon: '',
             colorClasses : ['color-yellow', 'color-red', 'color-blue', 'color-white', 'color-orange', 'color-green', 'color-purple']
         },
         gadgetIndividual : function (id) {
@@ -84,8 +85,9 @@ var iDashboard = {
                         return false;    
                     }).appendTo($(settings.handleSelector,this));
                 }
-
-            
+            if (thisGadgetSettings.icon.length > 0) {
+                $('<img src="'+thisGadgetSettings.icon+'" class="icon">').prependTo($(settings.handleSelector,this));
+            }
             if (thisGadgetSettings.editable) {
                 $('<a href="#" class="edit">EDIT</a>').mousedown(function (e) {
                     /* STOP event bubbling */
