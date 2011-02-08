@@ -14,6 +14,7 @@ class Gadget:
                 'title':'This is a gadget2',
                 'description':'This is gadget2',
                 'colour':'color-red',
+                'icon':'/media/img/triangle.png',
                 'fields':fields}
 
 

@@ -101,7 +101,13 @@ class GadgetInfomation(models.Model):
             return open_gadget(self.gadget).gadget_info()['colour']
         except:
             return ""
-    
+
+    def get_icon(self):
+        try:
+            return open_gadget(self.gadget).gadget_info()['icon']
+        except:
+            return ""
+
     def get_extra_fields(self):
         try:
             fields = open_gadget(self.gadget).gadget_info()['fields']

@@ -62,7 +62,6 @@ a {color:white;}
 }
 #columns .gadget .gadget-head {
     color: #000;
-    overflow: hidden;
     width: 100%;
     height: 30px;
     line-height: 30px;
