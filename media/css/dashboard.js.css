@@ -23,13 +23,13 @@
 }
 
 .gadget-head a.collapse  {
-    float: left;
+    float: right;
     display: inline;
     background: url(/media/img/buttons.gif) no-repeat -52px 0;
     width: 14px;
     height: 14px;
     text-indent: -9999em;
-    margin: 8px 0 8px 4px;
+    margin: 8px 4px 8px 0px;
     outline: none;
 }
 

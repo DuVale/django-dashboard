@@ -74,6 +74,18 @@ var iDashboard = {
                 }).appendTo($(settings.handleSelector, this));
             }
             
+            if (thisGadgetSettings.collapsible) {
+                $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function (e) {
+                                /* STOP event bubbling */
+                                e.stopPropagation();    
+                    }).click(function(){
+                        $(this).parents(settings.gadgetSelector).toggleClass('collapsed');
+                        iDashboard.savePreferences();
+                        return false;    
+                    }).appendTo($(settings.handleSelector,this));
+                }
+
+            
             if (thisGadgetSettings.editable) {
                 $('<a href="#" class="edit">EDIT</a>').mousedown(function (e) {
                     /* STOP event bubbling */
@@ -89,6 +101,8 @@ var iDashboard = {
                             .find('.edit-box').hide();
                     return false;
                 }).appendTo($(settings.handleSelector,this));
+                
+                
                 $('<div class="edit-box" style="display:none;"/>')
                     .append('<ul><li class="item"><label>Change the title?</label><input name="gadgettitle" id="gadgettitle'+this.id+'" value="' + $('h3',this).text() + '"/></li>')
                     .append((function(){
@@ -129,16 +143,8 @@ var iDashboard = {
                     
             }
             
-            if (thisGadgetSettings.collapsible) {
-                $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function (e) {
-                    /* STOP event bubbling */
-                    e.stopPropagation();    
-                }).click(function(){
-                    $(this).parents(settings.gadgetSelector).toggleClass('collapsed');
-                    iDashboard.savePreferences();
-                    return false;    
-                }).prependTo($(settings.handleSelector,this));
-            }
+            
+            
         });
         $('.edit-box').each(function () {
             $('ul.colors li',this).click(function () {
