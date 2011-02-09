@@ -291,8 +291,6 @@ var iDashboard = {
         $(settings.columns).each(function(i){
         //alert('load here');
         });
-                
-        $('body').css({background:'#000'});
         $(settings.columns).css({visibility:'visible'});
     }
   
