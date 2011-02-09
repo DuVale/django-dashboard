@@ -16,24 +16,22 @@ a {color:white;}
 .color-yellow h3,
 .color-white h3,
 .color-green h3
-.color-purple h3
 	{color:#000;}
 .color-red h3,
 .color-blue h3,
-.color-orange h3
+.color-orange h3,
+.color-purple h3
 	{color:#FFF;}
 /* End Colors */
 
 /* Head section */
 #head {
-    background: #000 url(/media/img/head-bg.png) repeat-x;
     height: 100px;
 }
 #head h1 {
     line-height: 100px;
     color: #FFF;
     text-align: center;
-    background: url(/media/img/inettuts.png) no-repeat center;
     text-indent: -9999em
 }
 /* End Head Section */
@@ -42,20 +40,18 @@ a {color:white;}
 #columns .column {
     float: left;
     width: 33.3%;
-		/* Min-height: */
-		min-height: 400px;
-		height: auto !important; 
-		height: 400px;
+    /* Min-height: */
+    min-height: 400px;
+    height: auto !important; 
+    height: 400px;
 }
 
 /* Column dividers (background-images) : */
-	#columns #column1 { background: url(/media/img/column-bg-left.png) no-repeat right top; }
-	#columns #column3 { background: url(/media/img/column-bg-right.png) no-repeat left top; }
 	
-#columns #column1 .gadget { margin: 30px 35px 0 25px; }
-#columns #column3 .gadget { margin: 30px 25px 0 35px; }
+#columns #column1 .gadget { margin: 25px 25px 0 15px; }
+#columns #column3 .gadget { margin: 25px 15px 0 25px; }
 #columns .gadget {
-    margin: 30px 20px 0 20px;
+    margin: 25px 10px 0 10px;
     padding: 2px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -71,7 +67,7 @@ a {color:white;}
     float: left;
 }
 #columns .gadget .gadget-content {
-    background: #333 url(/media/img/gadget-content-bg.png) repeat-x;
+    background: #333; /*background-color for gadget*/
     padding: 0 5px;
     color: #DDD;
     -moz-border-radius-bottomleft: 2px;
