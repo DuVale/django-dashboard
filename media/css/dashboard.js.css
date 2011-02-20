@@ -49,12 +49,7 @@
 #column2 .gadget-placeholder { margin: 25px 10px 0 10px; }
 #column3 .gadget-placeholder { margin: 25px 15px 0 10px; }
 
-.edit-box {
-    overflow: hidden;
-    background: #333 url(/media/img/gadget-content-bg.png) repeat-x;
-    margin-bottom: 2px;
-    padding: 10px 0;
-}
+
 
 .edit-box li.item {
     padding: 10px 0;
