@@ -45,10 +45,16 @@
 .collapsed .gadget-content {display:none !important;}
 
 .gadget-placeholder { border: 2px dashed #999;}
-#column1 .gadget-placeholder { margin: 25px 10px 0 15px; }
+#column1 .gadget-placeholder { margin: 25px 5px 0 15px; }
 #column2 .gadget-placeholder { margin: 25px 10px 0 10px; }
-#column3 .gadget-placeholder { margin: 25px 15px 0 10px; }
+#column3 .gadget-placeholder { margin: 25px 15px 0 5px; }
 
+.edit-box {
+    overflow: hidden;
+    background: #F2F2F2;
+    margin-bottom: 2px;
+    padding: 10px 0;
+}
 
 
 .edit-box li.item {
@@ -63,7 +69,7 @@
 .edit-box label {
     float: left;
     width: 30%;
-    color: #FFF;
+    color: black;;
     padding: 0 0 0 10px;
 }
 
