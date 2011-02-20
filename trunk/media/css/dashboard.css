@@ -2,26 +2,30 @@
 body,img,p,h1,h2,h3,h4,h5,h6,ul,ol {margin:0; padding:0; list-style:none; border:none;}
 /* End Reset */
 
-body {font-size:0.8em; font-family:Arial,Verdana,Sans-Serif; background: #000;}
+body {font-size:0.8em; font-family:Arial,Verdana,Sans-Serif; background: white}
 a {color:white;}
 
 /* Colors */
 .color-yellow {background:#f2bc00;}
 .color-red    {background:#dd0000;}
-.color-blue   {background:#148ea4;}
+.color-blue   {background:#0000CD;}
 .color-white  {background:#dfdfdf;}
 .color-orange {background:#f66e00;}
-.color-green  {background:#8dc100;}
+.color-green  {background:#00CD00;}
 .color-purple {background:#903f98;}
+.color-cyan {background: #50EBEC;}
 .color-yellow h3,
-.color-white h3,
-.color-green h3
+.color-white h3
+
 	{color:#000;}
 .color-red h3,
 .color-blue h3,
 .color-orange h3,
-.color-purple h3
+.color-purple h3,
+.color-green h3
 	{color:#FFF;}
+.color-cyan h3
+	{color:#0000A0;}
 /* End Colors */
 
 /* Head section */
@@ -48,8 +52,8 @@ a {color:white;}
 
 /* Column dividers (background-images) : */
 	
-#columns #column1 .gadget { margin: 25px 10px 0 15px; }
-#columns #column3 .gadget { margin: 25px 15px 0 10px; }
+#columns #column1 .gadget { margin: 25px 5px 0 15px; }
+#columns #column3 .gadget { margin: 25px 15px 0 5px; }
 #columns .gadget {
     margin: 25px 10px 0 10px;
     padding: 2px;
@@ -67,7 +71,7 @@ a {color:white;}
     float: left;
 }
 #columns .gadget .gadget-content {
-    background: #333; /*background-color for gadget*/
+    background: white; /*background-color for gadget*/
     padding: 0 5px;
     color: #DDD;
     -moz-border-radius-bottomleft: 2px;

@@ -25,7 +25,7 @@ var iDashboard = {
             collapsible: true,
             editable: true,
             icon: '',
-            colorClasses : ['color-yellow', 'color-red', 'color-blue', 'color-white', 'color-orange', 'color-green', 'color-purple']
+            colorClasses : ['color-yellow', 'color-red', 'color-blue', 'color-white', 'color-orange', 'color-green', 'color-purple', 'color-cyan']
         },
         gadgetIndividual : function (id) {
             return mainGadgetIndividual(id);
