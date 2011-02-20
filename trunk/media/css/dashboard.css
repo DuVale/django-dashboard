@@ -48,8 +48,8 @@ a {color:white;}
 
 /* Column dividers (background-images) : */
 	
-#columns #column1 .gadget { margin: 25px 25px 0 15px; }
-#columns #column3 .gadget { margin: 25px 15px 0 25px; }
+#columns #column1 .gadget { margin: 25px 10px 0 15px; }
+#columns #column3 .gadget { margin: 25px 15px 0 10px; }
 #columns .gadget {
     margin: 25px 10px 0 10px;
     padding: 2px;
