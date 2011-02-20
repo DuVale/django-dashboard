@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, HttpResponse
 import feedparser
 
 
@@ -23,7 +23,7 @@ class Gadget:
     def view(self,request,gadget_information):
         options = gadget_information.get_extra_fields()
         if options['url'] == "":
-            assert False, "No URL"
+            HttpResponse("<html><body>No URL</body></html>")
         rss_results = feedparser.parse(options['url'])['items'][:int(options['nor'])]
         
         return render_to_response('dashboard/gadgets/rss.html',{'rss_results':rss_results})
