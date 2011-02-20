@@ -45,9 +45,9 @@
 .collapsed .gadget-content {display:none !important;}
 
 .gadget-placeholder { border: 2px dashed #999;}
-#column1 .gadget-placeholder { margin: 25px 25px 0 15px; }
+#column1 .gadget-placeholder { margin: 25px 10px 0 15px; }
 #column2 .gadget-placeholder { margin: 25px 10px 0 10px; }
-#column3 .gadget-placeholder { margin: 25px 15px 0 25px; }
+#column3 .gadget-placeholder { margin: 25px 15px 0 10px; }
 
 .edit-box {
     overflow: hidden;
