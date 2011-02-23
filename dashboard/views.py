@@ -36,7 +36,7 @@ def update_ajax(request,name):
         dashboard = models.Dashboard.objects.get(name=name,user=request.user)
     except models.Dashboard.DoesNotExist:
         dashboard = models.Dashboard(name=name,user=request.user)
-    models.GadgetInfomation.objects.filter(dashboard=dashboard).update(active=False)
+    models.DashboardItem.objects.filter(dashboard=dashboard).update(active=False)
     if request.method == 'POST':
         dom = minidom.parseString(request.POST["xml"])
         parent = children(dom, 'xml')[0]
