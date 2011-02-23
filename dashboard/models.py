@@ -79,7 +79,7 @@ class Dashboard(models.Model):
 
 #------------------------------------------------------------------------------
 
-class GadgetInfomation(models.Model):
+class DashboardItem(models.Model):
     uuid = UUIDField(primary_key=True)
     dashboard = models.ForeignKey(Dashboard, db_column='dashboard_uuid')
     gadget = models.TextField()
@@ -92,7 +92,7 @@ class GadgetInfomation(models.Model):
     active = models.BooleanField()
     
     class Meta:
-        db_table = 'gadget_information'
+        db_table = 'dashboard_item'
         
     def get_colour(self):
         if self.colour != None:
