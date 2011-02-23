@@ -20,8 +20,8 @@ class Gadget:
                 'fields':fields}
 
 
-    def view(self,request,gadget_information):
-        options = gadget_information.get_extra_fields()
+    def view(self,request,dashboard_item):
+        options = dashboard_item.get_extra_fields()
         if options['url'] == "":
             HttpResponse("<html><body>No URL</body></html>")
         rss_results = feedparser.parse(options['url'])['items'][:int(options['nor'])]

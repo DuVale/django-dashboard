@@ -15,5 +15,5 @@ class Gadget:
                 'fields':fields}
 
 
-    def view(self,request,gadget_information):
+    def view(self,request,dashboard_item):
         return render_to_response('dashboard/gadgets/gadget4.html',{})
