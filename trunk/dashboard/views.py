@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 import models
 import xml.dom.minidom as minidom
 from xml_utils import children
+from django.template.loader import render_to_string
 
 #------------------------------------------------------------------------------
 
@@ -13,19 +14,24 @@ def dashboard(request, name):
     except models.Dashboard.DoesNotExist:
         dashboard = models.Dashboard(name=name,user=request.user)
         dashboard.save()
-    dashboard_data = []
-    column_data = {}
-    column_data['gadgets'] = models.DashboardItem.objects.filter(dashboard=dashboard,column_number=1).order_by('position')
-    column_data['column'] = 1
-    dashboard_data.append(column_data)
-    column_data = {}
-    column_data['gadgets'] = models.DashboardItem.objects.filter(dashboard=dashboard,column_number=2).order_by('position')
-    column_data['column'] = 2
-    dashboard_data.append(column_data)
-    column_data = {}
-    column_data['gadgets'] = models.DashboardItem.objects.filter(dashboard=dashboard,column_number=3).order_by('position')
-    column_data['column'] = 3
-    dashboard_data.append(column_data)
+    dashboard_data = {}
+    column_data = {'gadgets':[],'gadget_html':[]}
+    
+    dashboard_items = models.DashboardItem.objects.filter(dashboard=dashboard).order_by('column_number','position')
+    
+    column_number=0
+    
+    for gadget in dashboard_items:
+        if gadget.column_number != column_number and column_number != 0:
+            
+            dashboard_data[column_number] = column_data
+            column_data = {'gadgets':[],'gadget_html':[]}
+        column_number = gadget.column_number
+        column_data['gadgets'].append(gadget)
+        column_data['gadget_html'].append(render_to_string('dashboard/gadget.html', { 'gadget': gadget }))
+    if len(dashboard_items)>0:
+        dashboard_data[column_number] = column_data
+
     return render_to_response('dashboard/dashboard.html', 
             { 'name':name, 'dashboard_data':dashboard_data})
 
