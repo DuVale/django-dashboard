@@ -68,7 +68,8 @@ class UUIDField(CharField):
 
 class Dashboard(models.Model):
     uuid = UUIDField(primary_key=True)
-    name = models.TextField(null=True, blank=False)
+    name = models.CharField(null=True, blank=True, max_length=1024)
+    layout = models.CharField(null=True, blank=True, max_length=1024)
     user = models.ForeignKey(User,null=True, blank=True)
 
     def __unicode__(self):
