@@ -12,17 +12,17 @@
 
     <div id="columns">
         <ul id="column1" class="column">
-        {% for gadget in dashboard_data.1.gadget_html %}
+        {% for gadget in dashboard_data.1 %}
             {{ gadget }}
         {% endfor %}
         </ul>
         <ul id="column2" class="column">
-        {% for gadget in dashboard_data.2.gadget_html %}
+        {% for gadget in dashboard_data.2 %}
             {{ gadget }}
         {% endfor %}
         </ul>
         <ul id="column3" class="column">
-        {% for gadget in dashboard_data.3.gadget_html %}
+        {% for gadget in dashboard_data.3 %}
             {{ gadget }}
         {% endfor %}
         </ul>
@@ -36,7 +36,8 @@
     
     <script type="text/javascript">
     function mainGadgetIndividual(id) {
-        var iGadgetInIndividual = {{% for column in dashboard_data %}{% for gadget in column.gadgets %}
+        var iGadgetInIndividual = 
+    {{% for gadget in dashboard_items %}
             {{ gadget.make_html_id }} : {
                 // movable: false,
                 // removable: false,
@@ -45,7 +46,7 @@
                 icon:'{{ gadget.get_icon }}',
                 fields:{{ gadget.get_extra_fields_json }}
                 // colorClasses : ['color-yellow', 'color-red']
-            },{% endfor %}{% endfor %}
+            },{% endfor %}
         }
         return iGadgetInIndividual[id];
         
