@@ -53,6 +53,8 @@
 #column4 .gadget-placeholder { margin: 25px 5px 0 15px; }
 #column5 .gadget-placeholder { margin: 25px 15px 0 5px; }
 
+#column6 .gadget-placeholder { margin: 25px 15px 0 5px; }
+
 .edit-box {
     overflow: hidden;
     background: #F2F2F2;

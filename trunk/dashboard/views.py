@@ -12,7 +12,7 @@ def dashboard(request, name):
     try:
         dashboard = models.Dashboard.objects.get(name=name,user=request.user)
     except models.Dashboard.DoesNotExist:
-        dashboard = models.Dashboard(name=name,user=request.user)
+        dashboard = models.Dashboard(name=name,user=request.user,layout='three')
         dashboard.save()
     dashboard_data = {}
     column_data = []
@@ -30,7 +30,7 @@ def dashboard(request, name):
     if len(dashboard_items)>0:
         dashboard_data[column_number] = column_data
 
-    return render_to_response('dashboard/dashboard.html', 
+    return render_to_response('dashboard/layouts/%s.html' %(dashboard.layout), 
             { 'name':name, 'dashboard_data':dashboard_data,'dashboard_items':dashboard_items})
 
 #------------------------------------------------------------------------------
