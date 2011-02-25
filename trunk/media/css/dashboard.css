@@ -61,7 +61,7 @@ a {color:white;}
     -webkit-border-radius: 4px;
 }
 #columns #column4 .gadget { margin: 25px 5px 0 15px; }
-#columns #column5 .gadget { margin: 25px 15px 0 5px; }
+#columns #column5 .gadget { margin: 25px 15px 0 10px; }
 
 #columns .gadget .gadget-head {
     color: #000;
