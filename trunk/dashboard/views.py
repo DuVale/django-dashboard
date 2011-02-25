@@ -15,7 +15,7 @@ def dashboard(request, name):
         dashboard = models.Dashboard(name=name,user=request.user)
         dashboard.save()
     dashboard_data = {}
-    column_data = {'gadgets':[],'gadget_html':[]}
+    column_data = []
     
     dashboard_items = models.DashboardItem.objects.filter(dashboard=dashboard).order_by('column_number','position')
     
@@ -23,17 +23,15 @@ def dashboard(request, name):
     
     for gadget in dashboard_items:
         if gadget.column_number != column_number and column_number != 0:
-            
             dashboard_data[column_number] = column_data
-            column_data = {'gadgets':[],'gadget_html':[]}
+            column_data = []
         column_number = gadget.column_number
-        column_data['gadgets'].append(gadget)
-        column_data['gadget_html'].append(render_to_string('dashboard/gadget.html', { 'gadget': gadget }))
+        column_data.append(render_to_string('dashboard/gadget.html', { 'gadget': gadget }))
     if len(dashboard_items)>0:
         dashboard_data[column_number] = column_data
 
     return render_to_response('dashboard/dashboard.html', 
-            { 'name':name, 'dashboard_data':dashboard_data})
+            { 'name':name, 'dashboard_data':dashboard_data,'dashboard_items':dashboard_items})
 
 #------------------------------------------------------------------------------
 
