@@ -8,13 +8,11 @@
 </head>
 <body>
     <script type="text/javascript" src="/media/js/dashboard.js"></script>
-<div style="text-align:right;"><a style="color:black;" href="{% url view_gadgets name %}">Add gadgets</a></div>
+<div style="text-align:right;"><a style="color:black;" href="{% url view_gadgets name %}">Add gadgets</a> - <a style="color:black;" href="{% url show_layouts name %}">Change Layouts</a></div>
 
     
-
-    
-    <div style="clear:both;"/>
-    <div id="columns" style="display:inline;"> 
+<div style="clear:both;"/>
+<div id="columns" style="display:inline;"> 
     <ul id="column1" class="column" style="width:50%"> 
     {% for gadget in dashboard_data.1 %}
         {{ gadget }}
@@ -27,10 +25,10 @@
     </ul>
 </div>
 
-    <div style="clear:both;"/>
-    <div id="columns" style="display:inline;"> 
-    <ul id="column6" class="column" style="width:100%"> 
-    {% for gadget in dashboard_data.6 %}
+<div style="clear:both;"/>
+<div id="columns" style="display:inline;"> 
+    <ul id="column3" class="column" style="width:100%"> 
+    {% for gadget in dashboard_data.3 %}
         {{ gadget }}
     {% endfor %}
     </ul>
