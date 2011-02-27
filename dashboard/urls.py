@@ -8,5 +8,7 @@ urlpatterns = patterns('djangodashboard.dashboard',
     url(r'^update-ajax/(?P<name>[a-z_]+)/$', 'views.update_ajax'),
     url(r'^(?P<name>[a-z_]+)/add/(?P<gadget>[a-z_0-9]+)/$', 'views.add_gadget', name="add_gadget"),
     url(r'^(?P<name>[a-z_]+)/view-gadgets/$', 'views.view_gadgets',name="view_gadgets"),
+    url(r'^(?P<name>[a-z_]+)/show-layouts/$', 'views.show_layouts',name="show_layouts"),
+    url(r'^(?P<name>[a-z_]+)/(?P<layout>[a-zA-Z_]+)/save-layouts/$', 'views.save_layouts',name="save_layouts"),
     url(r'^(?P<name>[a-z_]+)/$', 'views.dashboard'),
 )

@@ -104,3 +104,20 @@ def add_gadget(request,name,gadget):
     return HttpResponseRedirect(url)
 
 #------------------------------------------------------------------------------
+
+def show_layouts(request,name):
+    return render_to_response('dashboard/layouts/index.html', {'name':name})
+    
+#------------------------------------------------------------------------------
+
+def save_layouts(request,name,layout):
+    dashboard = get_object_or_404(models.Dashboard,name=name,user=request.user)
+    dashboard.layout=layout
+    dashboard.save()
+    
+    if layout == 'two':
+        models.DashboardItem.objects.filter(dashboard=dashboard,column_number__gt=3).update(column_number=1)
+    
+    url = "/dashboard/%s/" %(name)
+    return HttpResponseRedirect(url)
+    

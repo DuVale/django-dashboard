@@ -44,16 +44,10 @@
 .collapsed .gadget-head a.collapse {background-position:-38px 0;}
 .collapsed .gadget-content {display:none !important;}
 
-.gadget-placeholder { border: 2px dashed #999;}
-#column1 .gadget-placeholder { margin: 25px 5px 0 15px; }
-#column2 .gadget-placeholder { margin: 25px 10px 0 10px; }
-#column3 .gadget-placeholder { margin: 25px 15px 0 5px; }
-
-
-#column4 .gadget-placeholder { margin: 25px 5px 0 15px; }
-#column5 .gadget-placeholder { margin: 25px 15px 0 5px; }
-
-#column6 .gadget-placeholder { margin: 25px 15px 0 5px; }
+.gadget-placeholder { 
+    border: 2px dashed #999;
+    margin: 25px 15px 0 15px;
+}
 
 .edit-box {
     overflow: hidden;
@@ -61,7 +55,6 @@
     margin-bottom: 2px;
     padding: 10px 0;
 }
-
 
 .edit-box li.item {
     padding: 10px 0;
