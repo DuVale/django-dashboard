@@ -1,7 +1,4 @@
 from django.shortcuts import render_to_response, HttpResponse
-import feedparser
-
-
 
 class Gadget:
 
@@ -23,8 +20,14 @@ class Gadget:
     def view(self,request,dashboard_item):
         options = dashboard_item.get_extra_fields()
         if options['url'] == "":
-            HttpResponse("<html><body>No URL</body></html>")
+            return HttpResponse("<html><body>No URL</body></html>")
+        try:
+            import feedparser
+
+        except ImportError:
+            return HttpResponse("""<html><body>Please install <a href="http://code.google.com/p/feedparser/">feedpasser</a></body></html>""")
         rss_results = feedparser.parse(options['url'])['items'][:int(options['nor'])]
+        
         
         return render_to_response('dashboard/gadgets/rss.html',{'rss_results':rss_results})
 
