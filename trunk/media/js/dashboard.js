@@ -1,10 +1,6 @@
-
 function changeHeight(obj) {
     obj.height=obj.contentWindow.document.body.scrollHeight;
 }
-
-
-
 
 var iDashboard = {
     
@@ -18,7 +14,6 @@ var iDashboard = {
         csrf_token: '',
         update_url: '',
         fields: [],
-        
         
         gadgetDefault : {
             movable: true,
@@ -106,7 +101,6 @@ var iDashboard = {
                     return false;
                 }).appendTo($(settings.handleSelector,this));
                 
-                
                 $('<div class="edit-box" style="display:none;"/>')
                     .append('<ul><li class="item"><label>Change the title?</label><input name="gadgettitle" id="gadgettitle'+this.id+'" value="' + $('h3',this).text() + '"/></li>')
                     .append((function(){
@@ -144,11 +138,7 @@ var iDashboard = {
                     })())
                     .append('<ul><li class="item"><label>&nbsp;</label><input type="button" value="Save" onclick="iDashboard.submitPreferences(\''+mainId+'\');"></input></li></ul></form>')
                     .insertAfter($(settings.handleSelector,this));
-                    
             }
-            
-            
-            
         });
         $('.edit-box').each(function () {
             $('ul.colors li',this).click(function () {
@@ -282,9 +272,7 @@ var iDashboard = {
         
         xml_string+="</xml>\r\n";
         $.post(this.settings.update_url, { xml: xml_string, csrfmiddlewaretoken: settings.csrf_token },function(data){});
-        
     },
-    
     sortGadgets : function () {
         var iDashboard = this,
             $ = this.jQuery,
@@ -295,6 +283,4 @@ var iDashboard = {
         });
         $(settings.columns).css({visibility:'visible'});
     }
-  
 };
-
