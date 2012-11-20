@@ -20,4 +20,4 @@ class Gadget:
 
     def view(self,request,dashboard_item):
         options = dashboard_item.get_extra_fields()
-        return render_to_response('dashboard/gadgets/gadget2.html',{'options':options})
+        return render_to_response('gadgets/gadget2.html',{'options':options})

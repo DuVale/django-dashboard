@@ -29,5 +29,5 @@ class Gadget:
         rss_results = feedparser.parse(options['url'])['items'][:int(options['nor'])]
         
         
-        return render_to_response('dashboard/gadgets/rss.html',{'rss_results':rss_results})
+        return render_to_response('gadgets/rss.html',{'rss_results':rss_results})
 
