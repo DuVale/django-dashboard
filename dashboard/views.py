@@ -28,11 +28,11 @@ def dashboard(request, name):
             dashboard_data[column_number] = column_data
             column_data = []
         column_number = gadget.column_number
-        column_data.append(render_to_string('dashboard/gadget.html', { 'gadget': gadget }))
+        column_data.append(render_to_string('gadget.html', { 'gadget': gadget }))
     if len(dashboard_items)>0:
         dashboard_data[column_number] = column_data
 
-    return render_to_response('dashboard/layouts/%s.html' %(dashboard.layout), 
+    return render_to_response('layouts/%s.html' %(dashboard.layout), 
             { 'name':name, 'dashboard_data':dashboard_data,'dashboard_items':dashboard_items}, 
                                                         context_instance=RequestContext(request))
 
@@ -85,7 +85,7 @@ def gadget(request,uuid):
 #------------------------------------------------------------------------------
 
 def view_gadgets(request,name):
-    return render_to_response('dashboard/view_gadgets.html', 
+    return render_to_response('view_gadgets.html', 
             {'name':name,'gadgets':find_gadgets()})
 
 #------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ def add_gadget(request,name,gadget):
 #------------------------------------------------------------------------------
 
 def show_layouts(request,name):
-    return render_to_response('dashboard/layouts/index.html', {'name':name})
+    return render_to_response('layouts/index.html', {'name':name})
     
 #------------------------------------------------------------------------------
 

@@ -16,4 +16,4 @@ class Gadget:
 
 
     def view(self,request,dashboard_item):
-        return render_to_response('dashboard/gadgets/gadget6.html',{})
+        return render_to_response('gadgets/gadget6.html',{})
