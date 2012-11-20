@@ -226,13 +226,11 @@ var iDashboard = {
                $(title).parents(settings.gadgetSelector).find('h3').text( $(title).val().length>20 ? $(title).val().substr(0,20)+'...' : $(title).val() );
             });
         });
-        iDashboard.savePreferences();
-        var currSrc = $('#iframe'+gadgetId).attr("src");
-        $('#iframe'+gadgetId).attr("src", currSrc);
-        changeHeight(document.getElementById('iframe'+gadgetId));
+        iDashboard.savePreferences(gadgetId);
+
         
     },
-    savePreferences : function () {
+    savePreferences : function (gadgetId) {
         var iDashboard = this,
             $ = this.jQuery,
             settings = this.settings;
@@ -271,7 +269,13 @@ var iDashboard = {
         });
         
         xml_string+="</xml>\r\n";
-        $.post(this.settings.update_url, { xml: xml_string, csrfmiddlewaretoken: settings.csrf_token },function(data){});
+        $.post(this.settings.update_url, { xml: xml_string, csrfmiddlewaretoken: settings.csrf_token },function(data){
+         if(gadgetId != undefined){
+            $('#iframe'+gadgetId).attr("src", $('#iframe'+gadgetId).attr("src"));
+            changeHeight(document.getElementById('iframe'+gadgetId));
+         }
+        
+        });
     },
     sortGadgets : function () {
         var iDashboard = this,
