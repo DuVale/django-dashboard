@@ -33,7 +33,7 @@
     </script>
     
     <script type="text/javascript">
-    iDashboard.init('{{ name }}','{{ csrf_token }}');
+    iDashboard.init('{% url dashboard_update_ajax name %}','{{ csrf_token }}','/media/css/');
     </script>
 </body>
 </html>

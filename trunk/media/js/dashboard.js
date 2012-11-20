@@ -15,8 +15,8 @@ var iDashboard = {
         gadgetSelector: '.gadget',
         handleSelector: '.gadget-head',
         contentSelector: '.gadget-content',
-        dashboardName: 'NA',
-        csrf_token: 'NA',
+        csrf_token: '',
+        update_url: '',
         fields: [],
         
         
@@ -34,13 +34,13 @@ var iDashboard = {
         }
     },
 
-    init : function (name, csrf_token) {
-        this.attachStylesheet('/media/css/dashboard.js.css');
+    init : function (update_url, csrf_token, css_folder) {
+        this.attachStylesheet(css_folder+'dashboard.js.css');
         this.sortGadgets();
         this.addGadgetControls();
         this.makeSortable();
-        this.settings.dashboardName=name;
         this.settings.csrf_token=csrf_token;
+        this.settings.update_url=update_url;
     },
     
     getGadgetSettings : function (id) {
@@ -281,7 +281,7 @@ var iDashboard = {
         });
         
         xml_string+="</xml>\r\n";
-        $.post("/dashboard/update-ajax/"+this.settings.dashboardName+"/", { xml: xml_string, csrfmiddlewaretoken: settings.csrf_token },function(data){});
+        $.post(this.settings.update_url, { xml: xml_string, csrfmiddlewaretoken: settings.csrf_token },function(data){});
         
     },
     
