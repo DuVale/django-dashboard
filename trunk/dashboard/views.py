@@ -5,7 +5,7 @@ import models
 import xml.dom.minidom as minidom
 from xml_utils import children
 from django.template.loader import render_to_string
-
+from django.template import RequestContext
 #------------------------------------------------------------------------------
 
 def dashboard(request, name):
@@ -31,7 +31,8 @@ def dashboard(request, name):
         dashboard_data[column_number] = column_data
 
     return render_to_response('dashboard/layouts/%s.html' %(dashboard.layout), 
-            { 'name':name, 'dashboard_data':dashboard_data,'dashboard_items':dashboard_items})
+            { 'name':name, 'dashboard_data':dashboard_data,'dashboard_items':dashboard_items}, 
+                                                        context_instance=RequestContext(request))
 
 #------------------------------------------------------------------------------
 

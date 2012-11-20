@@ -46,9 +46,6 @@
     
 </div>
 
-    
-    
-
     <script type="text/javascript" src="/media/js/jquery-ui-personalized-1.6rc2.min.js"></script>
     
     <script type="text/javascript">
@@ -66,12 +63,11 @@
             },{% endfor %}
         }
         return iGadgetInIndividual[id];
-        
     }
     </script>
     
     <script type="text/javascript">
-    iDashboard.init('{{ name }}');
+    iDashboard.init('{{ name }}','{{ csrf_token }}'););
     </script>
 </body>
 </html>
