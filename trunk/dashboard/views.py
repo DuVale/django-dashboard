@@ -6,6 +6,8 @@ import xml.dom.minidom as minidom
 from xml_utils import children
 from django.template.loader import render_to_string
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
+
 #------------------------------------------------------------------------------
 
 def dashboard(request, name):
@@ -101,8 +103,7 @@ def add_gadget(request,name,gadget):
     dashboard_item.gadget = gadget
     dashboard_item.title = open_gadget(gadget).gadget_info()['title']
     dashboard_item.save()
-    url = "/dashboard/%s/" %(name)
-    return HttpResponseRedirect(url)
+    return HttpResponseRedirect(reverse('dashboard_view', kwargs={'name':name}))
 
 #------------------------------------------------------------------------------
 
@@ -115,10 +116,7 @@ def save_layouts(request,name,layout):
     dashboard = get_object_or_404(models.Dashboard,name=name,user=request.user)
     dashboard.layout=layout
     dashboard.save()
-    
     if layout == 'two':
         models.DashboardItem.objects.filter(dashboard=dashboard,column_number__gt=3).update(column_number=1)
-    
-    url = "/dashboard/%s/" %(name)
-    return HttpResponseRedirect(url)
+    return HttpResponseRedirect(reverse('dashboard_view', kwargs={'name':name}))
     
